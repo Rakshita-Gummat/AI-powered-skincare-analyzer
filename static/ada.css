@@ -1,0 +1,122 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color:#c4d9f0;
+    color: white;
+}
+
+h1, h2 {
+    margin: 0;
+}
+
+p {
+    margin: 10px 0;
+}
+
+/* Main section styles */
+.main-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+/* Image section styling */
+.image-section {
+    flex-basis: 40%;
+}
+
+.image-section img {
+    width: 250px; /* Reduced size */
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Upload section styling */
+.upload-section {
+    flex-basis: 50%;
+}
+
+.custom-upload-button {
+    display: inline-block;
+    padding: 8px 16px; /* Reduced padding */
+    background-color: #CBA9BC;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.custom-upload-button:hover {
+    background-color: #CBA9BC;
+}
+
+button {
+    display: inline-block;
+    padding: 8px 16px; /* Reduced padding */
+    background-color: #357ABD;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #357ABD;
+}
+
+/* Product grid styles */
+.product-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Allow wrapping */
+    padding: 10px; /* Reduced padding */
+    gap: 10px; /* Add gap between items */
+}
+
+.product-card {
+    text-align: center;
+    width: 150px; /* Smaller card width */
+    margin: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px; /* Added padding inside the card */
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.next-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4A90E2;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.next-button:hover {
+    background-color: #357ABD;
+}

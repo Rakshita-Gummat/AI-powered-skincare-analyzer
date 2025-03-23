@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skin Analysis Results</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='ada.css') }}">
+  <style>
+    /* Inline styles for the results page (or move these to ada.css) */
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      background: linear-gradient(135deg, #e6e9f0, #eef1f5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #4A90E2;
+    }
+    header h1 {
+      font-size: 2.5em;
+    }
+    .result-section {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+    }
+    .result-section p {
+      font-size: 1.2em;
+      color: #555;
+      margin: 20px 0;
+    }
+    .result-section .condition {
+      font-weight: bold;
+      color: #4A90E2;
+      font-size: 1.5em;
+    }
+    .products-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .product-card {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      max-width: 200px;
+      text-align: center;
+    }
+    .product-card img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+    footer {
+      margin-top: 20px;
+      color: #777;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+      <h1>Skin Analysis Results</h1>
+      <p>Based on your analysis, here are the results and product recommendations.</p>
+  </header>
+
+  <section class="result-section">
+      <h2>Analysis Summary</h2>
+      <img src="{{ image_path }}" alt="Uploaded Image" width="300">
+      <p>Your skin shows signs of:</p>
+      <p class="condition">{{ condition }}</p>
+      <h3>Treatment Suggestions:</h3>
+      <ul>
+          {% for step in treatment %}
+          <li>{{ step }}</li>
+          {% endfor %}
+      </ul>
+  </section>
+  
+  <section class="products-section">
+      <h2>Recommended Products for You</h2>
+      <div class="product-grid">
+          <div class="product-card">
+              <img src="https://media1.popsugar-assets.com/files/thumbor/p1Q_1mDEPg-Ot4yDz-Ts52GnqiY/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2022/10/24/866/n/1922153/d171cdba234ceab4_netimgD44MBC/i/For-Clear-Skin-CeraVe-Acne-Skin-Care-Set.jpg" alt="Acne Treatment">
+              <p>Acne Treatment</p>
+          </div>
+          <div class="product-card">
+              <img src="https://thesafabeauty.com/cdn/shop/files/axisserum.webp?v=1698344904&width=1946" alt="Dark Spot Remover">
+              <p>Dark Spot Remover</p>
+          </div>
+          <div class="product-card">
+              <img src="https://spy.com/wp-content/uploads/2020/10/Remedial-Retinol-Face-Cream.jpg?resize=525" alt="Wrinkle Cream">
+              <p>Wrinkle Cream</p>
+          </div>
+      </div>
+  </section>
+
+  <footer>
+      <p>&copy; 2024 Skin Analysis Platform. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

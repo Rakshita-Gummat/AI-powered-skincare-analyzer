@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='ada.css') }}">    <!-- Link to your CSS file -->
+    <title>Skin Analysis</title>
+</head>
+<body>
+    <header>
+        <h1>Skin Analysis Platform</h1>
+        <p>Analyze your skin for acne, dark spots, wrinkles, and more.</p>
+    </header>
+
+    <section class="main-section">
+        <div class="image-section">
+            <img src="https://media1.popsugar-assets.com/files/thumbor/f4pFuy5SophNcVGpCpWgsuiUNxU/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2019/01/06/112/n/1922153/tmp_anVdnB_bc2452d3c23052a3_DSC_4322.jpg" alt="Human Face for Skin Analysis">
+        </div>
+
+        <!-- Link to the next page (m2.html) -->
+        <div class="next-section">
+            <h2>Proceed to Analysis</h2>
+            <a href="upload" class="next-button">Next</a> <!-- Link to m2.html -->
+        </div>
+    </section>
+
+    <section class="products-section">
+        <h2>Recommend Products for Your Skin</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://diary.marshabeauty.com/media/review_images/Skintific_2_Salicylic_Acid_Anti_Acne_Serum.jpg" alt="products">
+                <p>products</p>
+            </div>
+            <div class="product-card">
+                <img src="https://vysana.com/wp-content/uploads/2024/02/vysana-skin-analysis.png" alt="skin problems">
+                <p>skin problems</p>
+            </div>
+            <div class="product-card">
+                <img src="https://static.wixstatic.com/media/f8f628_941c51ac0bab41da995c3d4c9c224f6c~mv2.png/v1/fill/w_980,h_966,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/f8f628_941c51ac0bab41da995c3d4c9c224f6c~mv2.png" alt="skin products">
+                <p>skin products</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Skin Analysis Platform. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

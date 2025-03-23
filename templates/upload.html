@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Image for Analysis</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='ada.css') }}">
+  <style>
+    /* (Include your inline CSS or move it to ada.css if preferred) */
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #4A90E2;
+    }
+    
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+    
+    header p {
+      font-size: 1.2em;
+      color: #555;
+    }
+    
+    .upload-section {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      position: relative;
+      max-width: 400px;
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    .upload-section::before {
+      content: "";
+      background-image: url('https://facesspa.com/wp-content/uploads/2020/01/acne-facials.jpeg');
+      background-size: cover;
+      background-position: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0.3;
+      border-radius: 10px;
+      z-index: -1;
+    }
+    
+    .upload-section label.custom-upload-button {
+      display: inline-block;
+      background: #4A90E2;
+      color: #fff;
+      padding: 10px 20px;
+      margin: 15px 0;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+    
+    .upload-section label.custom-upload-button:hover {
+      background: #357ABD;
+    }
+    
+    .upload-section button {
+      padding: 10px 20px;
+      border: none;
+      background: #333;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+    
+    .upload-section button:hover {
+      background: #555;
+    }
+    
+    .moving-image {
+      margin-top: 20px;
+      max-width: 80%;
+      height: auto;
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    footer {
+      margin-top: 20px;
+      color: #777;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+      <h1>Upload Your Image for Analysis</h1>
+      <p>Simply upload a clear picture of your face to start the analysis.</p>
+  </header>
+
+  <section class="upload-section">
+      <form action="/upload" method="post" enctype="multipart/form-data">
+          <input type="file" name="file" id="file-upload" accept="image/*" style="display: none;">
+          <label for="file-upload" class="custom-upload-button">Choose an Image</label>
+          <button type="submit">Analyze</button>
+      </form>
+      
+      <script>
+        async function uploadImage() {
+  const fileInput = document.getElementById('file-upload');
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert("Please select an image file before uploading.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const response = await fetch('/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const result = await response.text(); // Fetch response as text
+    console.log("DEBUG: Server Response:", result);
+
+    if (response.redirected) {
+      window.location.href = response.url;
+    } else {
+      alert("Failed to upload image.");
+    }
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    alert("Failed to upload image.");
+  }
+}
+      </script>
+      
+      <!-- Moving image for added effect -->
+      <img src="https://img.freepik.com/premium-photo/indian-model-reveals-clean-skin-natural-face-cleanser-beauty-ad_878783-15650.jpg" alt="Illustrative Image" class="moving-image">
+  </section>
+
+  <footer>
+      <p>&copy; 2024 Skin Analysis Platform. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
