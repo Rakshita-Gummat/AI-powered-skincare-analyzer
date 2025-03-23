@@ -1,4 +1,4 @@
-# Skin Analysis App
+# Skincare analyzer
 
 An AI-based application to predict skin conditions and suggest treatments.
 
