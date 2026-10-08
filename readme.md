@@ -183,15 +183,6 @@ print(suggest_treatment(condition))
 - Accuracy depends on image quality, lighting and dataset diversity
 - No face detection or cropping step before inference
 
-##  Future Improvements
-
-- [ ] Real-time webcam capture
-- [ ] Confidence scores and top-k predictions
-- [ ] Automatic face detection and cropping
-- [ ] Grad-CAM visual explanations
-- [ ] Additional skin conditions and a larger, more diverse dataset
-- [ ] Cloud deployment (Docker, Render, Hugging Face Spaces)
-
 ##  Disclaimer
 
 This project is for **educational and informational purposes only**. It is not a medical device and does not replace professional dermatological advice.
