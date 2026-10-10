@@ -1,201 +1,144 @@
-# Skincare analyzer
-<div align="center">
-
 # AI-Powered Skincare Analyzer
 
-**Upload a face photo. Get a skin condition prediction and a tailored skincare routine.**
+A deep learning web app that classifies facial skin conditions from an uploaded image and returns tailored skincare suggestions.
 
-![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-2.18-FF6F00?logo=tensorflow&logoColor=white)
-![Keras](https://img.shields.io/badge/Keras-Deep%20Learning-D00000?logo=keras&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-3.1-000000?logo=flask&logoColor=white)
-![OpenCV](https://img.shields.io/badge/OpenCV-4.11-5C3EE8?logo=opencv&logoColor=white)
+**Detected classes:** acne · dark spots · normal skin · puffy eyes · wrinkles
+
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.18.0-orange)
+![Flask](https://img.shields.io/badge/Flask-3.1.0-black)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-</div>
+<!-- TODO: add demo GIF / screenshots of the landing, upload and results pages -->
 
 ---
 
-##  Overview
+## Features
 
-The Skincare Analyzer is an end-to-end deep learning application that classifies facial skin conditions from an image and recommends condition-specific skincare treatments. Three architectures (a custom CNN, DenseNet121 and EfficientNetB0) were trained and evaluated on the same dataset, and the best-suited model is served through a Flask web interface.
+- Upload a face image (PNG, JPG, JPEG, GIF) through a web UI
+- Multi-class skin condition prediction using a trained CNN
+- Three models trained and compared: custom CNN, DenseNet, EfficientNet
+- Condition-specific skincare recommendations on the results page
+- Input validation, secure filename handling, and error feedback via Flask flash messages
 
-**Detected conditions**
+## Tech Stack
 
-| Acne | Dark Spots | Normal Skin | Puffy Eyes | Wrinkles |
-|:---:|:---:|:---:|:---:|:---:|
-
-##  Features
-
--  **Image upload** through a clean web UI (PNG, JPG, JPEG, GIF)
--  **Multi-class classification** across 5 skin conditions
--  **Three trained models** compared: CNN, DenseNet121, EfficientNetB0
--  **Personalized treatment suggestions** for every detected condition
--  **Full evaluation suite**: accuracy, precision, recall, F1, confusion matrix, classification report
--  **Safe uploads**: extension validation, `secure_filename`, and user-facing error messages
--  **Persistent models** saved as `.keras` files and loaded once at startup
-
-##  Tech Stack
-
-| Layer | Technologies |
+| Layer | Tools |
 |---|---|
 | Language | Python |
-| Deep Learning | TensorFlow, Keras |
-| Computer Vision | OpenCV, NumPy, Pillow |
+| Deep learning | TensorFlow / Keras (CNN, DenseNet, EfficientNet) |
+| Image processing | OpenCV, NumPy, Pillow |
 | Backend | Flask, Werkzeug |
-| Frontend | HTML, CSS, Jinja2 |
-| Evaluation & Analysis | scikit-learn, Pandas, Matplotlib, Seaborn |
+| Frontend | HTML, CSS (Jinja2 templates) |
+| Analysis / evaluation | Pandas, scikit-learn, Matplotlib, Seaborn |
 
-##  How It Works
+## How It Works
 
-```mermaid
-flowchart LR
-    A[Upload image] --> B[Validate file type]
-    B --> C[Resize to 128×128<br/>Normalize to 0–1]
-    C --> D[Model inference]
-    D --> E[Predicted condition]
-    E --> F[Treatment suggestions]
-    F --> G[Results page]
-```
-
-1. The user uploads a face image on the `/upload` page.
-2. Flask validates the file extension and stores it securely in `static/uploads/`.
-3. OpenCV reads the image, resizes it to **128×128** and scales pixel values to `[0, 1]`.
-4. The model outputs class probabilities, and `argmax` selects the predicted condition.
-5. The condition is mapped to a skincare routine (cleansers, active ingredients, sunscreen, lifestyle tips) and displayed alongside the uploaded image.
-
-##  Model Architectures
-
-### 1. Custom CNN: `cnn_model.keras`
-- 3 convolutional blocks with ReLU activation and max pooling
-- Fully connected dense layers
-- Dropout for regularization
-
-### 2. DenseNet121: `densenet_model.keras`
-- ImageNet-pretrained DenseNet121 used as a frozen feature extractor
-- Global average pooling followed by fully connected layers
-- **Used by the web app for inference**
-
-### 3. EfficientNetB0: `efficientnet_model.keras`
-- ImageNet-pretrained EfficientNetB0 backbone
-- Custom classification head for the 5 skin condition classes
-
-### Training Configuration
-
-| Parameter | Value |
-|---|---|
-| Input size | 128 × 128 |
-| Epochs | 10 |
-| Batch size | 32 |
-| Optimizer | Adam |
-| Loss function | Categorical Crossentropy |
-
-### Evaluation
-
-Each model is evaluated on a held-out validation set using accuracy, precision, recall, F1 score, a confusion matrix and a per-class classification report.
-
-##  Dataset
-
-Labeled facial skin images organized by class:
+1. User uploads an image on `/upload`.
+2. Flask validates the extension and saves the file securely to `static/uploads/`.
+3. The image is read with OpenCV, resized to **128×128**, and normalised to [0, 1].
+4. The selected model outputs class probabilities; `argmax` gives the predicted condition. The web app currently uses **DenseNet**.
+5. The predicted condition is mapped to a set of skincare suggestions and shown on the results page with the uploaded image.
 
 ```
-DATASET/
-├── acne/
-├── dark spots/
-├── normal skin/
-├── puffy eyes/
-└── wrinkles/
+Upload → Validate → Preprocess (128×128, /255) → Model inference → Class + Treatment tips → Results page
 ```
 
-All images are resized to 128×128 and normalized to the `[0, 1]` range before training and inference.
+## Models
 
-##  Project Structure
+| Model | File | Notes |
+|---|---|---|
+| Custom CNN | `models/cnn_model.keras` | Baseline |
+| DenseNet | `models/densenet_model.keras` | Used by the web app |
+| EfficientNet | `models/efficientnet_model.keras` | Available in prediction script |
+
+### Results
+
+<!-- TODO: fill in from your training notebook -->
+| Model | Accuracy | Precision | Recall | F1 |
+|---|---|---|---|---|
+| CNN | – | – | – | – |
+| DenseNet | – | – | – | – |
+| EfficientNet | – | – | – | – |
+
+## Dataset
+
+- Five classes: acne, dark spots, normal skin, puffy eyes, wrinkles
+- Located in `Dataset/DATASET`
+- <!-- TODO: source, total images, per-class counts, train/val/test split, augmentation -->
+
+## Project Structure
 
 ```
 AI-powered-skincare-analyzer/
-├── app.py                      # Flask app: routes, inference, treatment mapping
-├── predict_skin_condition.py   # Prediction and treatment helper functions
-├── models/                     # Trained .keras models
-├── Dataset/DATASET/            # Training images by class
-├── static/                     # CSS and uploaded images
+├── app.py                      # Flask app (routes, inference, treatment mapping)
+├── predict_skin_condition.py   # Standalone prediction + treatment helpers
+├── cnn_model.keras             # Trained CNN
+├── densenet_model.keras        # Trained DenseNet
+├── models/                     # Model weights loaded by the app
+├── Dataset/DATASET/            # Training data
+├── static/                     # CSS, uploads
 ├── templates/                  # index.html, upload.html, results.html
-├── requirements.txt            # Pinned dependencies
-├── LICENSE
-└── README.md
+├── requirements.txt
+└── LICENSE
 ```
 
-##  Getting Started
-
-### Prerequisites
-- Python 3.9+
-- pip
-
-### Installation
+## Installation
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/Rakshita-Gummat/AI-powered-skincare-analyzer.git
 cd AI-powered-skincare-analyzer
 
-# 2. Create and activate a virtual environment
 python -m venv venv
-source venv/bin/activate          # Windows: venv\Scripts\activate
+source venv/bin/activate        # Windows: venv\Scripts\activate
 
-# 3. Install dependencies
 pip install -r requirements.txt
 ```
 
-Ensure `cnn_model.keras`, `densenet_model.keras` and `efficientnet_model.keras` are present in the `models/` directory.
+Make sure `cnn_model.keras`, `densenet_model.keras` and `efficientnet_model.keras` are inside the `models/` folder.
 
-### Run the web app
+## Usage
 
 ```bash
 python app.py
 ```
 
-Open **http://127.0.0.1:5000** in your browser, go to the upload page and submit a face image.
+Open `http://127.0.0.1:5000`, go to the upload page, and submit a face image.
 
-### Use the prediction API directly
+**Standalone prediction:**
 
 ```python
 from predict_skin_condition import predict_skin_condition, suggest_treatment
 
-condition = predict_skin_condition("densenet", "path/to/image.jpg")
-print(condition)
-print(suggest_treatment(condition))
+condition = predict_skin_condition('densenet', 'path/to/image.jpg')
+print(condition, suggest_treatment(condition))
 ```
 
-`model_type` accepts `"cnn"`, `"densenet"` or `"efficientnet"`.
+`model_type` accepts `'cnn'`, `'densenet'` or `'efficientnet'`.
 
-##  Sample Recommendations
+## Limitations
 
-| Condition | Example suggestions |
-|---|---|
-| Acne | Salicylic acid cleanser, benzoyl peroxide, non-comedogenic moisturizer, SPF 30+ |
-| Dark spots | Glycolic acid exfoliation, Vitamin C serum, broad-spectrum sunscreen |
-| Puffy eyes | Cold compress, caffeine eye cream, reduced salt intake, elevated sleep |
-| Wrinkles | Retinol serum at night, peptide moisturizer, daily sunscreen |
-| Normal skin | Gentle hydrating cleanser, hyaluronic acid moisturizer, SPF 30+ |
-
-##  Limitations
-
-- Predicts one dominant condition per image (no multi-label output)
+- Predicts one dominant condition per image; no multi-label output
 - Accuracy depends on image quality, lighting and dataset diversity
 - No face detection or cropping step before inference
+- <!-- TODO: add any known dataset bias / skin-tone coverage notes -->
 
-##  Disclaimer
+## Disclaimer
 
-This project is for **educational and informational purposes only**. It is not a medical device and does not replace professional dermatological advice.
+This tool is for educational and informational purposes only. It is not a medical device and does not replace advice from a dermatologist.
 
-## Contributing
+## Future Improvements
 
-Contributions are welcome. Fork the repo, create a feature branch and open a pull request.
+- Model selection / ensemble from the UI
+- Confidence scores and top-k predictions
+- Face detection and cropping (e.g., OpenCV Haar / MediaPipe)
+- Grad-CAM explainability
+- Deployment (Docker, Render / HF Spaces)
 
 ## License
 
-Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
+MIT, see [LICENSE](LICENSE).
 
+## Author
 
----
-
-<div align="center"> If you found this project useful, consider giving it a star.</div>
+**Rakshita Gummat** · [GitHub](https://github.com/Rakshita-Gummat)
