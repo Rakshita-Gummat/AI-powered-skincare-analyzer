@@ -44,22 +44,22 @@ DATASET/
 ├── puffy eyes/
 └── wrinkles/
 
-- Preprocessing: resize to **128×128**, normalize pixel values to `[0, 1]`
+- Preprocessing: resize to **128×128**, normalize pixel values to [0, 1]
 - Evaluated on a separate validation set
-- <!-- TODO: data source, total image count, per-class counts, split ratio, augmentation -->
+- !-- TODO: data source, total image count, per-class counts, split ratio, augmentation -->
 
 ## Model Architectures
 
-**1. Custom CNN** (`cnn_model.keras`)
+**1. Custom CNN** (cnn_model.keras)
 - 3 convolutional layers with ReLU and max pooling
 - Fully connected dense layers with dropout for regularization
 
-**2. DenseNet121** (`densenet_model.keras`)
+**2. DenseNet121** (densenet_model.keras`)
 - ImageNet-pretrained DenseNet121 as a frozen feature extractor
 - Global average pooling + fully connected classification head
 - Used by the web app for inference
 
-**3. EfficientNetB0** (`efficientnet_model.keras`)
+**3. EfficientNetB0** (efficientnet_model.keras`)
 - ImageNet-pretrained EfficientNetB0 backbone
 - Custom top layers for the 5-class output
 
@@ -92,7 +92,7 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Place `cnn_model.keras`, `densenet_model.keras` and `efficientnet_model.keras` in the `models/` folder.
+Place cnn_model.keras, densenet_model.keras and  efficientnet_model.keras in the models/ folder.
 
 ## Usage
 
